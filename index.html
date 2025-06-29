@@ -34,7 +34,39 @@
   <p>Ce plan est une vision, théorique et subjective, pour les transports en commun franciliens en 2050. Il prolonge des lignes existantes, en introduit de nouvelles et étend la palette de modes.</p>
 
   <!-- Plan SVG directement dans le HTML -->
-  <object data="plan.svg" type="image/svg+xml" id="plan-metro"></object>
+  <div id="plan"></div>
+
+<script>
+  // Chargement du SVG
+  fetch('plan.svg')
+    .then(response => response.text())
+    .then(svgText => {
+      // Injecter le SVG dans la page
+      document.getElementById('plan').innerHTML = svgText;
+
+      // Maintenant que le SVG est dans le DOM, on peut ajouter les listeners
+      const infosStations = {
+        Hopesgate: "Hopesgate : Station située au nord. Ligne 1. Services disponibles : ...",
+        Outer_Camp: "Outer Camp : Station de correspondance. Ligne 1. Services disponibles : ...",
+        Dûra: "Dûra : Station au sud. Ligne 1. Services disponibles : ...",
+      };
+
+      const stations = document.querySelectorAll('#plan #Stations > g');
+      const infoDiv = document.getElementById('info');
+
+      stations.forEach(station => {
+        station.addEventListener('click', () => {
+          const id = station.id;
+          const info = infosStations[id] || "Info non disponible";
+          infoDiv.textContent = info;
+        });
+      });
+    })
+    .catch(err => {
+      document.getElementById('info').textContent = 'Erreur lors du chargement du plan.';
+      console.error(err);
+    });
+</script>
 
 </body>
 </html>
