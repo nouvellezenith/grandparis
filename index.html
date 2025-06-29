@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Plan de Métro Fictif</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 2em;
+      background: #f9f9f9;
+    }
+    svg {
+      width: 100%;
+      max-width: 800px;
+      border: 1px solid #ccc;
+      background: #fff;
+    }
+    .station {
+      cursor: pointer;
+    }
+    #info {
+      margin-top: 1em;
+      padding: 1em;
+      background: #e3e3e3;
+      border-radius: 8px;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Plan de Métro de Métropolis</h1>
+  <p>Bienvenue ! Cliquez sur une station ou une ligne du plan pour en savoir plus.</p>
+
+  <!-- Plan SVG directement dans le HTML -->
+  <svg viewBox="0 0 400 200">
+    <!-- Ligne rouge -->
+    <line id="ligne-rouge" x1="50" y1="50" x2="350" y2="50" stroke="red" stroke-width="4" />
+
+    <!-- Stations -->
+    <circle id="station-1" class="station" cx="50" cy="50" r="6" fill="white" stroke="black" stroke-width="2" />
+    <circle id="station-2" class="station" cx="200" cy="50" r="6" fill="white" stroke="black" stroke-width="2" />
+    <circle id="station-3" class="station" cx="350" cy="50" r="6" fill="white" stroke="black" stroke-width="2" />
+
+    <!-- Noms de stations -->
+    <text x="50" y="40" font-size="12" text-anchor="middle">Alpha</text>
+    <text x="200" y="40" font-size="12" text-anchor="middle">Central</text>
+    <text x="350" y="40" font-size="12" text-anchor="middle">Omega</text>
+  </svg>
+
+  <div id="info">Cliquez sur un élément du plan pour afficher les détails ici.</div>
+
+  <script>
+    const infoBox = document.getElementById("info");
+
+    document.getElementById("station-1").addEventListener("click", () => {
+      infoBox.innerHTML = "<strong>Alpha :</strong> Station d’entrée de la ligne rouge.";
+    });
+
+    document.getElementById("station-2").addEventListener("click", () => {
+      infoBox.innerHTML = "<strong>Central :</strong> Station centrale avec correspondance.";
+    });
+
+    document.getElementById("station-3").addEventListener("click", () => {
+      infoBox.innerHTML = "<strong>Omega :</strong> Terminus de la ligne rouge.";
+    });
+
+    document.getElementById("ligne-rouge").addEventListener("click", () => {
+      infoBox.innerHTML = "<strong>Ligne Rouge :</strong> Ligne est-ouest desservant 3 stations.";
+    });
+  </script>
+
+</body>
+</html>
